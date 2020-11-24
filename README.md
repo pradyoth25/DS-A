@@ -1,1 +1,2 @@
-# DS-A
+# Data Structures and Algorithms
+## Pradyoth Hegde
