@@ -125,227 +125,109 @@ public class LinkedListTest {
         assertThat(list.peekLast(), is(4));
         assertFalse(list.isEmpty());
     }
-//
-//    @Test
-//    public void testPeeking() {
-//        // 5
-//        list.addFirst(5);
-//        assertThat(list.peekFirst()).isEqualTo(5);
-//        assertThat(list.peekLast()).isEqualTo(5);
-//
-//        // 6 - 5
-//        list.addFirst(6);
-//        assertThat(list.peekFirst()).isEqualTo(6);
-//        assertThat(list.peekLast()).isEqualTo(5);
-//
-//        // 7 - 6 - 5
-//        list.addFirst(7);
-//        assertThat(list.peekFirst()).isEqualTo(7);
-//        assertThat(list.peekLast()).isEqualTo(5);
-//
-//        // 7 - 6 - 5 - 8
-//        list.addLast(8);
-//        assertThat(list.peekFirst()).isEqualTo(7);
-//        assertThat(list.peekLast()).isEqualTo(8);
-//
-//        // 7 - 6 - 5
-//        list.removeLast();
-//        assertThat(list.peekFirst()).isEqualTo(7);
-//        assertThat(list.peekLast()).isEqualTo(5);
-//
-//        // 7 - 6
-//        list.removeLast();
-//        assertThat(list.peekFirst()).isEqualTo(7);
-//        assertThat(list.peekLast()).isEqualTo(6);
-//
-//        // 6
-//        list.removeFirst();
-//        assertThat(list.peekFirst()).isEqualTo(6);
-//        assertThat(list.peekLast()).isEqualTo(6);
-//    }
-//
-//    @Test
-//    public void testRemoving() {
-//        DoublyLinkedList<String> strs = new DoublyLinkedList<>();
-//        strs.add("a");
-//        strs.add("b");
-//        strs.add("c");
-//        strs.add("d");
-//        strs.add("e");
-//        strs.add("f");
-//        strs.remove("b");
-//        strs.remove("a");
-//        strs.remove("d");
-//        strs.remove("e");
-//        strs.remove("c");
-//        strs.remove("f");
-//        assertThat(strs.getSize()).isEqualTo(0);
-//    }
-//
-//    @Test
-//    public void testRemoveAt() {
-//        list.add(1);
-//        list.add(2);
-//        list.add(3);
-//        list.add(4);
-//        list.removeAt(0);
-//        list.removeAt(2);
-//        assertThat(list.peekFirst()).isEqualTo(2);
-//        assertThat(list.peekLast()).isEqualTo(3);
-//        list.removeAt(1);
-//        list.removeAt(0);
-//        assertThat(list.getSize()).isEqualTo(0);
-//    }
-//
-//    @Test
-//    public void testClear() {
-//        list.add(22);
-//        list.add(33);
-//        list.add(44);
-//        assertThat(list.getSize()).isEqualTo(3);
-//        list.clear();
-//        assertThat(list.getSize()).isEqualTo(0);
-//        list.add(22);
-//        list.add(33);
-//        list.add(44);
-//        assertThat(list.getSize()).isEqualTo(3);
-//        list.clear();
-//        assertThat(list.getSize()).isEqualTo(0);
-//    }
-//
-//    @Test
-//    public void testRandomizedRemoving() {
-//        java.util.LinkedList<Integer> javaLinkedList = new java.util.LinkedList<>();
-//        for (int loops = 0; loops < LOOPS; loops++) {
-//
-//            list.clear();
-//            javaLinkedList.clear();
-//
-//            List<Integer> randNums = genRandList(TEST_SZ);
-//            for (Integer value : randNums) {
-//                javaLinkedList.add(value);
-//                list.add(value);
-//            }
-//
-//            Collections.shuffle(randNums);
-//
-//            for (int i = 0; i < randNums.getSize(); i++) {
-//
-//                Integer rm_val = randNums.get(i);
-//                assertThat(javaLinkedList.remove(rm_val)).isEqualTo(list.remove(rm_val));
-//                assertThat(javaLinkedList.getSize()).isEqualTo(list.getSize());
-//
-//                java.util.Iterator<Integer> iter1 = javaLinkedList.iterator();
-//                java.util.Iterator<Integer> iter2 = list.iterator();
-//                while (iter1.hasNext()) assertThat(iter1.next()).isEqualTo(iter2.next());
-//
-//                iter1 = javaLinkedList.iterator();
-//                iter2 = list.iterator();
-//                while (iter1.hasNext()) assertThat(iter1.next()).isEqualTo(iter2.next());
-//            }
-//
-//            list.clear();
-//            javaLinkedList.clear();
-//
-//            for (Integer value : randNums) {
-//                javaLinkedList.add(value);
-//                list.add(value);
-//            }
-//
-//            // Try removing elements whether or not they exist
-//            for (int i = 0; i < randNums.getSize(); i++) {
-//
-//                Integer rm_val = (int) (MAX_RAND_NUM * Math.random());
-//                assertThat(javaLinkedList.remove(rm_val)).isEqualTo(list.remove(rm_val));
-//                assertThat(javaLinkedList.getSize()).isEqualTo(list.getSize());
-//
-//                java.util.Iterator<Integer> iter1 = javaLinkedList.iterator();
-//                java.util.Iterator<Integer> iter2 = list.iterator();
-//                while (iter1.hasNext()) assertThat(iter1.next()).isEqualTo(iter2.next());
-//            }
-//        }
-//    }
-//
-//    @Test
-//    public void testRandomizedRemoveAt() {
-//        java.util.LinkedList<Integer> javaLinkedList = new java.util.LinkedList<>();
-//
-//        for (int loops = 0; loops < LOOPS; loops++) {
-//
-//            list.clear();
-//            javaLinkedList.clear();
-//
-//            List<Integer> randNums = genRandList(TEST_SZ);
-//
-//            for (Integer value : randNums) {
-//                javaLinkedList.add(value);
-//                list.add(value);
-//            }
-//
-//            for (int i = 0; i < randNums.getSize(); i++) {
-//
-//                int rm_index = (int) (list.getSize() * Math.random());
-//
-//                Integer num1 = javaLinkedList.remove(rm_index);
-//                Integer num2 = list.removeAt(rm_index);
-//                assertThat(num1).isEqualTo(num2);
-//                assertThat(javaLinkedList.getSize()).isEqualTo(list.getSize());
-//
-//                java.util.Iterator<Integer> iter1 = javaLinkedList.iterator();
-//                java.util.Iterator<Integer> iter2 = list.iterator();
-//                while (iter1.hasNext()) assertThat(iter1.next()).isEqualTo(iter2.next());
-//            }
-//        }
-//    }
-//
-//    @Test
-//    public void testRandomizedIndexOf() {
-//        java.util.LinkedList<Integer> javaLinkedList = new java.util.LinkedList<>();
-//
-//        for (int loops = 0; loops < LOOPS; loops++) {
-//
-//            javaLinkedList.clear();
-//            list.clear();
-//
-//            List<Integer> randNums = genUniqueRandList(TEST_SZ);
-//
-//            for (Integer value : randNums) {
-//                javaLinkedList.add(value);
-//                list.add(value);
-//            }
-//
-//            Collections.shuffle(randNums);
-//
-//            for (int i = 0; i < randNums.getSize(); i++) {
-//                Integer elem = randNums.get(i);
-//                Integer index1 = javaLinkedList.indexOf(elem);
-//                Integer index2 = list.indexOf(elem);
-//
-//                assertThat(index1).isEqualTo(index2);
-//                assertThat(javaLinkedList.getSize()).isEqualTo(list.getSize());
-//
-//                java.util.Iterator<Integer> iter1 = javaLinkedList.iterator();
-//                java.util.Iterator<Integer> iter2 = list.iterator();
-//                while (iter1.hasNext()) assertThat(iter1.next()).isEqualTo(iter2.next());
-//            }
-//        }
-//    }
-//
-//    @Test
-//    public void testToString() {
-//        DoublyLinkedList<String> strs = new DoublyLinkedList<>();
-//        assertThat(strs.toString()).isEqualTo("[  ]");
-//        strs.add("a");
-//        assertThat(strs.toString()).isEqualTo("[ a ]");
-//        strs.add("b");
-//        assertThat(strs.toString()).isEqualTo("[ a, b ]");
-//        strs.add("c");
-//        strs.add("d");
-//        strs.add("e");
-//        strs.add("f");
-//        assertThat(strs.toString()).isEqualTo("[ a, b, c, d, e, f ]");
-//    }
-//
+
+    @Test
+    public void testPeeking() {
+        // 5
+        list.addFirst(5);
+        assertThat(list.peekFirst(), is(5));
+        assertThat(list.peekLast(), is(5));
+
+        // 6 - 5
+        list.addFirst(6);
+        assertThat(list.peekFirst(), is(6));
+        assertThat(list.peekLast(), is(5));
+
+        // 7 - 6 - 5
+        list.addFirst(7);
+        assertThat(list.peekFirst(), is(7));
+        assertThat(list.peekLast(), is(5));
+
+        // 7 - 6 - 5 - 8
+        list.addLast(8);
+        assertThat(list.peekFirst(), is(7));
+        assertThat(list.peekLast(), is(8));
+
+        // 7 - 6 - 5
+        list.removeLast();
+        assertThat(list.peekFirst(), is(7));
+        assertThat(list.peekLast(), is(5));
+
+        // 7 - 6
+        list.removeLast();
+        assertThat(list.peekFirst(), is(7));
+        assertThat(list.peekLast(), is(6));
+
+        // 6
+        list.removeFirst();
+        assertThat(list.peekFirst(), is(6));
+        assertThat(list.peekLast(), is(6));
+    }
+
+    @Test
+    public void testRemoving() {
+        LinkedList<String> strs = new LinkedList<>();
+        strs.add("a");
+        strs.add("b");
+        strs.add("c");
+        strs.add("d");
+        strs.add("e");
+        strs.add("f");
+        strs.remove("b");
+        strs.remove("a");
+        strs.remove("d");
+        strs.remove("e");
+        strs.remove("c");
+        strs.remove("f");
+        assertThat(strs.getSize(), is(0));
+    }
+
+    @Test
+    public void testRemoveAt() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.removeAt(0);
+        list.removeAt(2);
+        assertThat(list.peekFirst(), is(2));
+        assertThat(list.peekLast(), is(3));
+        list.removeAt(1);
+        list.removeAt(0);
+        assertThat(list.getSize(), is(0));
+    }
+
+    @Test
+    public void testClear() {
+        list.add(22);
+        list.add(33);
+        list.add(44);
+        assertThat(list.getSize(), is(3));
+        list.clear();
+        assertThat(list.getSize(), is(0));
+        list.add(22);
+        list.add(33);
+        list.add(44);
+        assertThat(list.getSize(), is(3));
+        list.clear();
+        assertThat(list.getSize(), is(0));
+    }
+
+    @Test
+    public void testToString() {
+        LinkedList<String> strs = new LinkedList<>();
+        assertThat(strs.toString(), is("[  ]"));
+        strs.add("a");
+        assertThat(strs.toString(), is("[ a ]"));
+        strs.add("b");
+        assertThat(strs.toString(), is("[ a, b ]"));
+        strs.add("c");
+        strs.add("d");
+        strs.add("e");
+        strs.add("f");
+        assertThat(strs.toString(), is("[ a, b, c, d, e, f ]"));
+    }
+
 //    @Test
 //    public void testIntegerList() throws Exception {
 //        LinkedList<Integer> list = new LinkedList<Integer>();
