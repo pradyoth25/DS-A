@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class LinkedList<T> implements Iterable<T> {
+public class DoublyLinkedList<T> implements Iterable<T> {
 
     int size = 0;
     Node<T> head = null;

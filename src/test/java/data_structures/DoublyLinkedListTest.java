@@ -10,14 +10,14 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class LinkedListTest {
+public class DoublyLinkedListTest {
 
     private static final int LOOPS = 10000;
     private static final int TEST_SZ = 40;
     private static final int NUM_NULLS = TEST_SZ / 5;
     private static final int MAX_RAND_NUM = 250;
 
-    LinkedList<Integer> list;
+    DoublyLinkedList<Integer> list;
 
     // Generate a list of random numbers
     static List<Integer> genRandList(int sz) {
@@ -39,7 +39,7 @@ public class LinkedListTest {
 
     @Before
     public void setup() {
-        list = new LinkedList<>();
+        list = new DoublyLinkedList<>();
     }
 
     @Test
@@ -166,7 +166,7 @@ public class LinkedListTest {
 
     @Test
     public void testRemoving() {
-        LinkedList<String> strs = new LinkedList<>();
+        DoublyLinkedList<String> strs = new DoublyLinkedList<>();
         strs.add("a");
         strs.add("b");
         strs.add("c");
@@ -215,7 +215,7 @@ public class LinkedListTest {
 
     @Test
     public void testToString() {
-        LinkedList<String> strs = new LinkedList<>();
+        DoublyLinkedList<String> strs = new DoublyLinkedList<>();
         assertThat(strs.toString(), is("[  ]"));
         strs.add("a");
         assertThat(strs.toString(), is("[ a ]"));
@@ -228,15 +228,15 @@ public class LinkedListTest {
         assertThat(strs.toString(), is("[ a, b, c, d, e, f ]"));
     }
 
-//    @Test
-//    public void testIntegerList() throws Exception {
-//        LinkedList<Integer> list = new LinkedList<Integer>();
-//        assertThat(list.isEmpty(), is(true));
-//        list.add(4);
-//        assertThat(list.getSize(), is(1));
-//        list.add(2);
-//        list.addAt(1, 5);
-//        assertThat(list.toString(), is("[4, 5, 2]"));
-//    }
+    @Test
+    public void testIntegerList() throws Exception {
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
+        assertThat(list.isEmpty(), is(true));
+        list.add(4);
+        assertThat(list.getSize(), is(1));
+        list.add(2);
+        list.addAt(1, 5);
+        assertThat(list.toString(), is("[ 4, 5, 2 ]"));
+    }
 
 }
