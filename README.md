@@ -5,3 +5,5 @@
 2. Singly Linked List
 3. Doubly Linked List
 4. Stack
+5. Queue
+6. Circular Queue
