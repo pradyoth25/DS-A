@@ -7,3 +7,4 @@
 4. Stack
 5. Queue
 6. Circular Queue
+7. Priority Queue
