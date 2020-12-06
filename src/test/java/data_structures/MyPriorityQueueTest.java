@@ -32,4 +32,14 @@ public class MyPriorityQueueTest {
         }
     }
 
+    @Test
+    public void testHeapProperty1() {
+        MyPriorityQueue.PQ pq = new MyPriorityQueue.PQ();
+        Integer[] nums = {3, 2, 5, 6, 7, 9, 4, 8, 1};
+        for (int i : nums) pq.add(i);
+        for (int i = 1; i <= 9; i++) {
+            assertThat(pq.poll(), is(i));
+        }
+    }
+
 }

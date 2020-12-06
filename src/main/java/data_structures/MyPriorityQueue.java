@@ -21,6 +21,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     /**
      * Construct a PQ with an initial capacity
+     *
      * @param size - capacity
      */
     public MyPriorityQueue(int size) {
@@ -36,6 +37,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     /**
      * PQ using "heapify" in O(n) time.
+     *
      * @param elements - which is an array
      */
     public MyPriorityQueue(T[] elements) {
@@ -55,6 +57,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     /**
      * This given O(nlog(n)) time creation
+     *
      * @param elements - which is a collection
      */
     public MyPriorityQueue(Collection<T> elements) {
@@ -64,6 +67,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     /**
      * O(1)
+     *
      * @return the min element in the PQ
      */
     public T peek() {
@@ -73,6 +77,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     /**
      * O(log(n))
+     *
      * @return the first element in the PQ (min element)
      */
     public T poll() {
@@ -81,6 +86,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     /**
      * O(1)
+     *
      * @param elem - element to check
      * @return true if the elem exists in the PQ
      */
@@ -91,6 +97,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     /**
      * O(log(n))
+     *
      * @param elem - to be added to the PQ
      */
     public void add(T elem) {
@@ -103,6 +110,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     /**
      * Removes an element in O(log(n)) time
+     *
      * @param element - to be removed
      * @return true or false based on whether the element was found or not
      */
@@ -115,6 +123,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
 
     /**
      * Checks if this heap is a min heap
+     *
      * @param k - index at which the heap checking has to be done
      * @return true or false based on whether the heap invariant is satisfied or not
      */
@@ -200,6 +209,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
     /**
      * Sinking process in O(log(n))
      * Gets the left and right children for the given index (k)
+     *
      * @param k - index at which the sink should begin
      */
     private void sink(int k) {
@@ -279,4 +289,140 @@ public class MyPriorityQueue<T extends Comparable<T>> {
         return heap.toString();
     }
 
+    public static class PQ {
+
+        List<Integer> heap = new ArrayList<>();
+        Map<Integer, TreeSet<Integer>> indexMap = new HashMap<>();
+
+        public int getSize() {
+            return heap.size();
+        }
+
+        public boolean isEmpty() {
+            return this.getSize() == 0;
+        }
+
+        public int peek() {
+            if (isEmpty()) return -1;
+            return heap.get(0);
+        }
+
+        public Integer poll() {
+            return removeAt(0);
+        }
+
+        public void add(int elem) {
+            heap.add(elem);
+            int indexOfLastElem = this.getSize() - 1;
+            mapAdd(elem, indexOfLastElem);
+            swim(indexOfLastElem);
+        }
+
+        private void mapAdd(int value, int index) {
+            TreeSet<Integer> indices = indexMap.get(value);
+            if (indices == null) {
+                indices = new TreeSet<>();
+                indices.add(index);
+                indexMap.put(value, indices);
+            } else {
+                indices.add(index);
+            }
+        }
+
+        /**
+         * Index-wise checking
+         * Gets the parent index for the given index "k"
+         * Run the loop as long as k > 0 && HEAP[k] <= HEAP[PARENT]
+         * Swap the values and indices in the heap and the index map
+         * Update K and the PARENT
+         */
+        private void swim(int k) {
+            int parent = (k - 1) / 2;
+            while (k > 0 && isHeapValueLessThanAtIndices(k, parent)) {
+                swap(parent, k);
+                k = parent;
+                parent = (k - 1) / 2;
+            }
+        }
+
+        private boolean isHeapValueLessThanAtIndices(int i, int j) {
+            Integer node1 = heap.get(i);
+            Integer node2 = heap.get(j);
+            return node1.compareTo(node2) <= 0;
+        }
+
+        private void swap(int i, int j) {
+            Integer ithElem = heap.get(i);
+            Integer jthElem = heap.get(j);
+            heap.set(i, jthElem);
+            heap.set(j, ithElem);
+            mapSwap(ithElem, jthElem, i, j);
+        }
+
+        private void mapSwap(Integer val1, Integer val2, int val1Index, int val2Index) {
+            Set<Integer> set1 = indexMap.get(val1);
+            Set<Integer> set2 = indexMap.get(val2);
+
+            set1.remove(val1Index);
+            set2.remove(val2Index);
+            set1.add(val2Index);
+            set2.add(val1Index);
+        }
+
+        private Integer removeAt(int index) {
+            if (isEmpty()) return null;
+            int indexOfLastElem = this.getSize() - 1;
+            Integer removedData = heap.get(index);
+            swap(index, indexOfLastElem);
+
+            heap.remove(indexOfLastElem);
+            mapRemove(removedData, indexOfLastElem);
+
+            if (index == indexOfLastElem) return removedData;
+
+            Integer element = heap.get(index);
+            sink(index);
+
+            if (heap.get(index).equals(element)) swim(index);
+
+            return removedData;
+        }
+
+        private void mapRemove(Integer removedData, int index) {
+            TreeSet<Integer> indices = indexMap.get(removedData);
+            indices.remove(index);
+            if (indices.size() == 0) {
+                indexMap.remove(removedData);
+            }
+        }
+
+        /**
+         * Index wise checking, first get the heap size
+         * Keep doing it in an infinite loop until we break
+         * For the given "k", get the left and right children.
+         * Set the smallest to be left initially
+         * If the right index < heapSize and HEAP[right] <= HEAP[left]
+         * then set smallest to be right
+         * If the left index >= heapSize OR HEAP[k] <= HEAP[smallest]
+         * then BREAK
+         * Swap smallest and k
+         * Set k to be smallest
+         */
+        private void sink(int k) {
+            int heapSize = getSize();
+            while (true) {
+                int left = 2 * k + 1;
+                int right = 2 * k + 2;
+                int smallest = left;
+                if (right < heapSize && isHeapValueLessThanAtIndices(right, left)) {
+                    smallest = right;
+                }
+                if (left >= heapSize || isHeapValueLessThanAtIndices(k, smallest)) break;
+
+                swap(smallest, k);
+                k = smallest;
+            }
+        }
+
+    }
 }
