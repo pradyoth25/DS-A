@@ -8,3 +8,4 @@
 5. Queue
 6. Circular Queue
 7. Priority Queue
+8. Union Find
