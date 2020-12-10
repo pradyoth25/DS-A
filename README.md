@@ -9,3 +9,4 @@
 6. Circular Queue
 7. Priority Queue
 8. Union Find
+9. Binary Search Tree
