@@ -10,3 +10,4 @@
 7. Priority Queue
 8. Union Find
 9. Binary Search Tree
+10. Hash Table
