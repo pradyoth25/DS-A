@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 public class MyUnionFindTest {
 
     @Test
-    public void testNumgetNumComponents() {
+    public void testNumGetNumComponents() {
         MyUnionFind uf = new MyUnionFind(5);
         assertThat(uf.getNumComponents(), is(5));
 
