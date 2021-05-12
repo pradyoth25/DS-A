@@ -42,7 +42,7 @@ public class BinarySearch {
      * An advanced way to implement Binary Search.
      * Search Condition needs to access element's immediate right neighbor
      * Use element's right neighbor to determine if condition is met and decide whether to go left or right
-     * Gurantees Search Space is at least 2 in size at each step
+     * Guarantees Search Space is at least 2 in size at each step
      * Post-processing required. Loop/Recursion ends when you have 1 element left. Need to assess if the remaining element meets the condition.
      *
      * Initial Condition: left = 0, right = length; Sometimes right can be length - 1 also
@@ -68,7 +68,7 @@ public class BinarySearch {
      * An alternative way to implement Binary Search
      * Search Condition needs to access element's immediate left and right neighbors
      * Use element's neighbors to determine if condition is met and decide whether to go left or right
-     * Gurantees Search Space is at least 3 in size at each step
+     * Guarantees Search Space is at least 3 in size at each step
      * Post-processing required. Loop/Recursion ends when you have 2 elements left. Need to assess if the remaining elements meet the condition.
      *
      * Initial Condition: left = 0, right = length-1; Sometimes "right" can be length
