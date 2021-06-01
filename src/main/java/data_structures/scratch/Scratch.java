@@ -1,4 +1,4 @@
-package data_structures;
+package data_structures.scratch;
 
 public class Scratch {
 
