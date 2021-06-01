@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.binarySearch;
 
 public class BinarySearch {
 
@@ -76,6 +76,20 @@ public class BinarySearch {
      * Searching Left: right = mid
      * Searching Right: left = mid
      */
+
+    public int firstIndexOfNegativeNumber(int[] nums) {
+        int l = 0, r = nums.length - 1, ans = 0;
+        while (l < r) {
+            int mid = (l + r) / 2;
+            if (nums[mid] < 0) {
+                ans = mid;
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return ans;
+    }
 
 
 }
