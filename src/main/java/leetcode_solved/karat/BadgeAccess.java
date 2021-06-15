@@ -34,4 +34,42 @@ public class BadgeAccess {
         return res;
     }
 
+    public List<String> frequentAccess(String[][] input) {
+        List<String> res = new ArrayList<>();
+        Map<String, List<Integer>> map = new HashMap<>();
+        for (String[] access : input) {
+            map.putIfAbsent(access[0], new ArrayList<>());
+            map.get(access[0]).add(getTime(access[1]));
+        }
+        for (Map.Entry<String, List<Integer>> e : map.entrySet()) {
+            Collections.sort(e.getValue());
+            List<Integer> times = e.getValue();
+            List<Integer> cTimes = new ArrayList<>();
+            int prev = e.getValue().get(0);
+            for (int time : times) {
+                if (time - prev <= 60) {
+                    cTimes.add(time);
+                    if (cTimes.size() >= 3) res.add(e.getKey() + ":" + cTimes.toString());
+                } else {
+                    prev = time;
+                    cTimes = new ArrayList<>();
+                }
+            }
+        }
+
+        return res;
+    }
+    private int getTime(String time) {
+        int minutes;
+        int hours;
+        if (time.length() == 3) {
+            minutes = Integer.parseInt(time.substring(1));
+            hours = time.charAt(0) - '0';
+        } else {
+            minutes = Integer.parseInt(time.substring(2));
+            hours = Integer.parseInt(time.substring(0, 2));
+        }
+        return hours * 60 + minutes;
+    }
+
 }

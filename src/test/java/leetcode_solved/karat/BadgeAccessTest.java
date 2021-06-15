@@ -31,4 +31,12 @@ public class BadgeAccessTest {
         System.out.println(code.unusualAccess(input));
     }
 
+    @Test
+    public void test2() {
+        String[][] input = new String[][] {
+                {"James", "1300"}, {"Martha", "1600"}, {"Martha", "1620"}, {"Martha", "1530"}
+        };
+        System.out.println(code.frequentAccess(input));
+    }
+
 }

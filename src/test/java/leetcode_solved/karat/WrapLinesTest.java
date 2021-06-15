@@ -21,4 +21,10 @@ public class WrapLinesTest {
         System.out.println(code.wrapLines2(input3, 15));
     }
 
+    @Test
+    public void test2() {
+        String[] input = new String[]{"1p3acres", "is", "a", "good", "place", "to", "communicate"};
+        System.out.println(code.wrapLines1(input, 12));
+    }
+
 }
