@@ -24,4 +24,22 @@ public class CoursesTest {
         System.out.println(code.courses(input));
     }
 
+    @Test
+    public void test1() {
+        String[][] input = new String[][]{
+                {"Logic", "COBOL"},
+                {"Data Structures", "Algorithms"},
+                {"Creative Writing", "Data Structures"},
+                {"Algorithms", "COBOL"},
+                {"Intro to Computer Science", "Data Structures"},
+                {"Logic", "Compilers"},
+                {"Data Structures", "Logic"},
+                {"Creative Writing", "System Administration"},
+                {"Databases", "System Administration"},
+                {"Creative Writing", "Databases"},
+                {"Intro to Computer Science", "Graphics"}
+        };
+        System.out.println(code.middleCourses(input));
+    }
+
 }

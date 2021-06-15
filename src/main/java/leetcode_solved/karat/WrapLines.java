@@ -11,9 +11,9 @@ public class WrapLines {
         StringBuilder sb = new StringBuilder();
         int i = 0;
         while (i < words.length) {
-            sb.append(words[i++]);
-            if (sb.length() + 1 + words[i].length() <= maxWidth) {
-                sb.append("-").append(words[i++]);
+            if (sb.length() == 0) sb.append(words[i ++]);
+            else if (sb.length() + 1 + words[i].length() <= maxWidth) {
+                sb.append("-").append(words[i ++]);
             } else {
                 res.add(sb.toString());
                 sb.setLength(0);
