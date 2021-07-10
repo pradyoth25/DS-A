@@ -131,11 +131,9 @@ public class Scratch {
             else if (root.val < key) root.right = remove(root.right, key);
             else {
                 if (root.left == null) {
-                    TreeNode right = root.right;
-                    root = null; return right;
+                    return root.right;
                 } else if (root.right == null) {
-                    TreeNode left = root.left;
-                    root = null; return left;
+                    return root.left;
                 } else {
                     TreeNode min = getMin(root.right);
                     root.val = min.val;
